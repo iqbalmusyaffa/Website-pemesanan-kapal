@@ -125,7 +125,8 @@ include '../koneksi.php';
 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="kapal_id">
 <option selected>Pilih Kapal dibawah ini </option>
     <?php
-  $query    =mysqli_query($konek, "SELECT * FROM kapal");
+     $id = $_GET['id'];
+  $query    =mysqli_query($konek, "SELECT * FROM kapal WHERE id_kapal='$id'");
                 while ($data1 = mysqli_fetch_array($query)) {
                 ?>
                 <option value="<?php echo $data1['id_kapal'];?>"><?php echo $data1['nama_kapal'];?></option>

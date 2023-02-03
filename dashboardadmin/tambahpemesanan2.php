@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if($_SESSION['role']==""){
     header("location:../login.php?pesan=gagal");
@@ -30,6 +31,8 @@ include '../koneksi.php';
   <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
@@ -39,20 +42,24 @@ include '../koneksi.php';
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="dashboard_user.php">East Horizon Trip</a></h1>
+        <h1><a href="dashboard_admin.php">East Horizon Trip</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="dashboard_user.php" class="link">Home</a></li>
+          <li><a href="dashboard_admin.php" class="link">Home</a></li>
           <li><a href="about.php" class="link">Tentang Kami</a></li>
           
           <li><a href="kontak.php">Kontak</a></li>
           <li class="dropdown"><a href="#"><span>Kelola Data</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
               <li><a href="detailuser.php">Data User</a></li>
+              <li><a href="kategori.php">Data Kategori</a></li>
+              <li><a href="tujuan.php">Data Tujuan</a></li>
+              <li><a href="kapal.php">Data Kapal</a></li>
+              <li><a href="pembayaran.php">Data Pembayaran</a></li>
               <li><a href="pemesanan.php">Data Pemesanan</a></li>
             </ul>
           </li>
@@ -76,85 +83,88 @@ include '../koneksi.php';
 
     </div>
   </header><!-- End Header -->
-
-  <section id="hero" style="margin-top: -20px;">
-    <div class="hero-container">
-      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-        <div class="carousel-inner" role="listbox">
-
-          <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(../assets/img/slide/slide-1.jpg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>East Horizon Trip</span></h2>
-                <p class="animate__animated animate__fadeInUp">Aplikasi Ticketing kapal termewah di indonesia !</p>
-                <a href="index.php?hal=about" class="btn-get-started animate__animated animate__fadeInUp">Baca Selengkapnya</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2 -->
-          <div class="carousel-item" style="background-image: url(../assets/img/slide/slide-2.jpg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated fanimate__adeInDown">Pesan Tiket <span> Sekarang Juga</span></h2>
-                <p class="animate__animated animate__fadeInUp">Nikmati perjalanan ini dengan menyenangkan, dan dapatkan penawaran dan promo menarik!</p>
-                <a href="index.php?hal=#" class="btn-get-started animate__animated animate__fadeInUp">Pesan Tiket</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="carousel-item" style="background-image: url(../assets/img/slide/slide-3.jpeg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Lihat Rute <span> Yang Kami Lalui</span></h2>
-                <p class="animate__animated animate__fadeInUp">Pilihan rute kami sangat cocok buat anda bersama keluarga!, </p>
-                <a href="index.php?hal=#" class="btn-get-started animate__animated animate__fadeInUp">Lihat Rute</a>
-              </div>
-            </div>
-          </div>
-
+  <section class="page-title bg-title overlay-dark">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<div class="title mt-5">
+					<h3>Tambah Data pembayaran</h3>
+				</div>
+				<ol class="breadcrumb justify-content-center p-0 m-0">
+				  <li class="breadcrumb-item"><a href="index.php?hal=home">Home</a></li>
+                  <li class="breadcrumb-item active">Data Kapal</li>
+                  <li class="breadcrumb-item active">Data pembayaran</li>
+				  <li class="breadcrumb-item active">Tambah Data pembayaran</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section contact-form">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title">
+					<h3>Tambah <span class="alternate">Data pembayaran</span></h3>
+				</div>
+			</div>
+		</div>
+		<form action="" method="POST" class="row" enctype="multipart/form-data">
+        <div class="form-group">
+                                <input type="text" class="form-control" hidden name="id_pemesanan" autocomplete="off" value="<?php echo $tampil['id_pemesanan']; ?>">
         </div>
-
-        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-        </a>
-
-        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
-
-      </div>
-    </div>
-  </section><!-- End Hero -->
-
-    <!-- ======= Featured Section ======= -->
+    <label for="exampleFormControlTextarea1" class="form-label">nama pemesanan</label>
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="user_id">
+<option selected>Pilih nama pemesanan dibawah ini </option>
     <?php
-                             $user = mysqli_query($konek, "SELECT * FROM kapal INNER JOIN tujuan ON kapal.tujuan_kapal = tujuan.id_tujuan INNER JOIN kategori ON kapal.kategori_kapal = kategori.id_kategori  ");
-                             foreach ( $user as $data){
-                              
-                             ?>
-    <section id="featured" class="featured">
-    <div class="container">
-          <div class="icon-box text-center d-flex mt-4" >
-            <div style="width: 30%;">
-              <img style="width: 300px; height: 300px;" src="../dashboardadmin/<?php echo $data['foto'] ?>" alt=""> 
-            </div>
-            <div style="width: 70%;">
-              <h2 class="mt-4"><?php echo $data['tujuan'] ?></h2>
-              <p class="mb-3"><?php echo $data['nama_kapal'] ?></p>
-              <p class="mb-3"><?php echo $data['nama_kategori_kapal'] ?></p>
-              <h2 class="mt-4"><?php echo "Rp " . number_format($data['harga']) ?></h2>
-              <p class="p-4">Segera Lakukan Pemesanan dan nikmati perjalanan anda</p>
-              <a href="tambahpemesanan.php?id=<?php echo $data['id_kapal']; ?>" role="button" class="btn btn-success">Mulai Pesan</a>
-            </div>
-            
-          </div>
-      </div>
-    </section><!-- End Featured Section -->
-    <?php } ?>
+  $query    =mysqli_query($konek, "SELECT * FROM user");
+                while ($data1 = mysqli_fetch_array($query)) {
+                ?>
+                <option value="<?php echo $data1['id_user'];?>"><?php echo $data1['fullname'];?></option>
+                <?php
+                }
+                ?>
+</select>
+<label for="exampleFormControlTextarea1" class="form-label"> nama kapal</label>
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="kapal_id">
+<option selected>Pilih Kapal dibawah ini </option>
+    <?php
+    $id = $_GET['id'];
+  $query    =mysqli_query($konek, "SELECT * FROM kapal WHERE id_kapal='$id'");
+                while ($data1 = mysqli_fetch_array($query)) {
+                ?>
+                <option value="<?php echo $data1['id_kapal'];?>"><?php echo $data1['nama_kapal'];?></option>
+                <?php
+                }
+                ?>
+</select>
+<label for="exampleFormControlTextarea1" class="form-label"> nama Pembayaran</label>
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="pembayaran_id">
+<option selected>Pilih pembayaran dibawah ini </option>
+    <?php
+  $query    =mysqli_query($konek, "SELECT * FROM pembayaran");
+                while ($data1 = mysqli_fetch_array($query)) {
+                ?>
+                <option value="<?php echo $data1['id_pembayaran'];?>"><?php echo $data1['pembayaran'];?></option>
+                <?php
+                }
+                ?>
+</select>
+<div class="col-md-3">
+                <label class="form-label fw-bold">tgl aktif</label>
+				<input type="text" class="form-control main" name="tgl_aktif" id="datepicker" placeholder="tgl aktif">
+			</div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">tgl berakhir</label>
+				<input type="text" class="form-control main" name="tgl_berakhir" id="datepicker2" rows="3" placeholder="tgl berakhir">
+			</div>
+			<div class="col-12 text-center mt-4">
+				<button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top:20px;" name="btnsimpan">Tambah Pemesanan</button>
+
+			</div>
+		</form>
+	</div>
+</section>
     <!-- ======= Footer ======= -->
 <footer id="footer">
 
@@ -234,6 +244,18 @@ include '../koneksi.php';
 <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="../assets/vendor/php-email-form/validate.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+    dateFormat: 'dd-mm-yy'
+});
+    $( "#datepicker2" ).datepicker({
+    dateFormat: 'dd-mm-yy'
+});
+  } );
+  </script>
 
 <!-- Template Main JS File -->
 <script src="../assets/js/main.js"></script>
@@ -243,3 +265,19 @@ include '../koneksi.php';
 </html>
 </body>
 </html>
+<?php
+    if (isset($_POST['btnsimpan'])) {
+        $user_id = $_POST['user_id'];
+        $kapal_id =$_POST['kapal_id'];
+        $pembayaran_id =$_POST['pembayaran_id'];
+        $tgl_aktif = date("Y-m-d");
+        $tgl_berakhir = date("Y-m-d");
+        $status = $_POST['status'];
+        $data = mysqli_query($konek, "INSERT INTO pemesanan (user_id,kapal_id,pembayaran_id,tgl_aktif,tgl_berakhir,status) Values('$user_id','$kapal_id','$pembayaran_id','$tgl_aktif','$tgl_berakhir','$status')");
+        if ($data) {
+            echo "<script>alert('Data berhasil dimasukan '); document.location.href = 'pemesanan.php';</script>";
+        } else {
+            echo "<script>alert('Data gagal dimasukan ');</script>";
+        }
+    }
+    ?>
