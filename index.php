@@ -110,20 +110,31 @@
   </section><!-- End Hero -->
 
     <!-- ======= Featured Section ======= -->
+    <?php
+    include 'koneksi.php';
+                             $user = mysqli_query($konek, "SELECT * FROM kapal INNER JOIN tujuan ON kapal.tujuan_kapal = tujuan.id_tujuan INNER JOIN kategori ON kapal.kategori_kapal = kategori.id_kategori  ");
+                             foreach ( $user as $data){
+                              
+                             ?>
     <section id="featured" class="featured">
-    <div class="container ">
-     <div class="d-flex flex-row">
-  <div class="col">
-    <div class="card">
-      <img src="assets/img/slide/slide-1.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    <div class="container">
+          <div class="icon-box text-center d-flex mt-4" >
+            <div style="width: 30%;">
+              <img style="width: 300px; height: 300px;" src="./dashboardadmin/<?php echo $data['foto'] ?>" alt=""> 
+            </div>
+            <div style="width: 70%;">
+            <h2 class="mt-4"><?php echo $data['tujuan'] ?></h2>
+              <p class="mb-3"><?php echo $data['nama_kapal'] ?></p>
+              <p class="mb-3"><?php echo $data['nama_kategori_kapal'] ?></p>
+              <h2 class="mt-4"><?php echo "Rp " . number_format($data['harga']) ?></h2>
+              <p class="p-4">Segera Lakukan Pemesanan dan nikmati perjalanan anda</p>
+              <a href="tambahpemesanan.php" role="button" class="btn btn-success">Mulai Pesan</a>
+            </div>
+            
+          </div>
       </div>
-    </div>
-  </div>
-  </div>
     </section><!-- End Featured Section -->
+    <?php } ?>
     <!-- ======= Footer ======= -->
 <footer id="footer">
 

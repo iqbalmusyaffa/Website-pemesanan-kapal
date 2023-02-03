@@ -35,7 +35,7 @@ include '../koneksi.php';
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 </head>  
 <body>
-  <header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
+<header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
@@ -48,21 +48,34 @@ include '../koneksi.php';
         <ul>
           <li><a href="dashboard_admin.php" class="link">Home</a></li>
           <li><a href="about.php" class="link">Tentang Kami</a></li>
+          
           <li><a href="kontak.php">Kontak</a></li>
+          <li class="dropdown"><a href="#"><span>Kelola Data</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+              <li><a href="detailuser.php">Data User</a></li>
+              <li><a href="kategori.php">Data Kategori</a></li>
+              <li><a href="tujuan.php">Data Tujuan</a></li>
+              <li><a href="kapal.php">Data Kapal</a></li>
+              <li><a href="pembayaran.php">Data Pembayaran</a></li>
+              <li><a href="pemesanan.php">Data Pemesanan</a></li>
+            </ul>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
             <span>Hello <?php echo $_SESSION['username']; ?></span>
-            <img src="../<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
-            <i class="bi bi-chevron-down"></i>  
+            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+              <i class="bi bi-chevron-down"></i>
             </a>
-          <!-- Dropdown list -->
-          <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
+              <!-- Dropdown list -->
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="detailuser.php">Kelola User</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+          </li>
         </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>

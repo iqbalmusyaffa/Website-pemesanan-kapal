@@ -1,3 +1,10 @@
+<?php
+session_start();
+if($_SESSION['role']==""){
+    header("location:../login.php?pesan=gagal");
+}
+include '../koneksi.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,26 +35,40 @@
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 </head>  
 <body>
-  <header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
+<header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.php">East Horizon Trip</a></h1>
+        <h1><a href="dashboard_user.php">East Horizon Trip</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.php?hal=home" class="link">Home</a></li>
-          <li><a href="index.php?hal=about" class="link">Tentang Kami</a></li>
-          <li><a href="index.php?hal=kontak">Kontak</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">Login</a>
+          <li><a href="dashboard_user.php" class="link">Home</a></li>
+          <li><a href="about.php" class="link">Tentang Kami</a></li>
+          
+          <li><a href="kontak.php">Kontak</a></li>
+          <li class="dropdown"><a href="#"><span>Kelola Data</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+              <li><a href="detailuser.php">Data User</a></li>
+              <li><a href="pemesanan.php">Data Pemesanan</a></li>
+            </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
+            <span>Hello <?php echo $_SESSION['username']; ?></span>
+            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+              <i class="bi bi-chevron-down"></i>
             </a>
+              <!-- Dropdown list -->
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="detailuser.php">Kelola User</a></li>
+              <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -75,7 +96,7 @@
 
         <div class="row">
           <div class="col-lg-6">
-            <img src="assets/img/about2.jpg" class="img-fluid" alt="">
+            <img src="../assets/img/about2.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content">
             <h3>Sistem Pemesanan Tiket Kapal</h3>

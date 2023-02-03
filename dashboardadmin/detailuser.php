@@ -38,11 +38,11 @@ include '../koneksi.php';
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 </head>  
 <body>
-  <header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
+<header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.php">East Horizon Trip</a></h1>
+        <h1><a href="dashboard_admin.php">East Horizon Trip</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -63,21 +63,22 @@ include '../koneksi.php';
               <li><a href="pemesanan.php">Data Pemesanan</a></li>
             </ul>
           </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
             <span>Hello <?php echo $_SESSION['username']; ?></span>
-            <img src="../<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
               <i class="bi bi-chevron-down"></i>
             </a>
               <!-- Dropdown list -->
             <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
               <li><a class="dropdown-item" href="detailuser.php">Kelola User</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+          </li>
         </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>
@@ -139,7 +140,7 @@ include '../koneksi.php';
                             <td><?php echo $data['email'] ?></td>
                             <td><?php echo $data['no_telepon'] ?></td>
                             <td><?php echo $data['role'] ?></td>
-                            <td><img src="../<?php echo $data['foto'] ?>" style="width: 50px; height: 50px;"></td>
+                            <td><img src="<?php echo $data['foto'] ?>" style="width: 50px; height: 50px;"></td>
                             <td>
                                 <form action="" method="POST" >
                                     

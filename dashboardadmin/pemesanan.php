@@ -38,7 +38,7 @@ include '../koneksi.php';
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 </head>  
 <body>
-  <header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
+<header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
@@ -63,21 +63,24 @@ include '../koneksi.php';
               <li><a href="pemesanan.php">Data Pemesanan</a></li>
             </ul>
           </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
             <span>Hello <?php echo $_SESSION['username']; ?></span>
-            <img src="../<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
-            <i class="bi bi-chevron-down"></i>  
+            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+              <i class="bi bi-chevron-down"></i>
             </a>
+              <!-- Dropdown list -->
             <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
               <li><a class="dropdown-item" href="detailuser.php">Kelola User</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+          </li>
         </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+
     </div>
   </header><!-- End Header -->
 
@@ -114,6 +117,7 @@ include '../koneksi.php';
                                 <th>nama pemesanan</th>
                                 <th>nama kategori kapal</th>
                                 <th>nama kapal</th>
+                                <th>tujuan kapal</th>
                                 <th>methode pembayaran</th>
                                 <th>tgl aktif</th>
                                 <th>tgl berakhir</th>
@@ -124,11 +128,11 @@ include '../koneksi.php';
                         </thead>
                         <tbody>
                         <?php
-                             $user = mysqli_query($konek, "SELECT * FROM pemesanan INNER JOIN user ON pemesanan.nama_pemesanan = user.id_user 
-                             INNER JOIN kategori ON pemesanan.nama_kategori_kapal = kategori.id_kategori
-                             INNER JOIN kapal ON pemesanan.nama_kapal = kapal.id_kapal
-                             INNER JOIN tujuan ON pemesanan.nama_tujuan = tujuan.id_tujuan
-                             INNER JOIN pembayaran ON pemesanan.methode_pembayaran = pembayaran.id_pembayaran
+                             $user = mysqli_query($konek, "SELECT * FROM pemesanan INNER JOIN user ON pemesanan.user_id = user.id_user 
+                             INNER JOIN kapal ON pemesanan.kapal_id = kapal.id_kapal
+                             INNER JOIN kategori ON kapal.kategori_kapal = kategori.id_kategori 
+                             INNER JOIN tujuan ON kapal.tujuan_kapal = tujuan.id_tujuan 
+                             INNER JOIN pembayaran ON pemesanan.pembayaran_id = pembayaran.id_pembayaran
                              ");
                              $no = 1;
                              while ($data = mysqli_fetch_array($user)) {
@@ -138,10 +142,11 @@ include '../koneksi.php';
                             <td><?php echo $data['fullname'] ?></td>
                             <td><?php echo $data['nama_kategori_kapal'] ?></td>  
                             <td><?php echo $data['nama_kapal'] ?></td>
+                            <td><?php echo $data['tujuan'] ?></td>
                             <td><?php echo $data['pembayaran'] ?></td>
                             <td><?php echo $data['tgl_aktif'] ?></td>
                             <td><?php echo $data['tgl_berakhir'] ?></td>
-                            <td><?php echo $data['harga'] ?></td>
+                            <td><?php echo "Rp " . number_format($data['harga']) ?></td>
                             <td>
                                 <form action="" method="POST" >
                                 <a href="cetakpemesanan2.php?id=<?php echo $data['id_pemesanan']; ?>" target="_BLANK">
@@ -168,7 +173,7 @@ include '../koneksi.php';
                                     echo '<p> <a href="terimapemesanan.php?id='.$data['id_pemesanan'].'&status=0" class="btn btn-primary">Terima</a></p>';
                                   }
                                   else{
-                                    echo '<p> <a href="tolakpemesanan.php?id='.$data['id_pemesanan'].'&status=1" class="btn btn-danger">Tolak</a></p>';
+                                    echo '<p> <a href="pendingpemesanan.php?id='.$data['id_pemesanan'].'&status=1" class="btn btn-warning">Pending</a></p>';
                                   }
                                 ?>
                              </td>

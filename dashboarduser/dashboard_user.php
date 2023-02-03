@@ -35,24 +35,23 @@ include '../koneksi.php';
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 </head>  
 <body>
-  <header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
+<header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.php">East Horizon Trip</a></h1>
+        <h1><a href="dashboard_user.php">East Horizon Trip</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.php?hal=home" class="link">Home</a></li>
-          <li><a href="index.php?hal=about" class="link">Tentang Kami</a></li>
-          <li><a href="index.php?hal=#" class="link">Blog</a></li>
+          <li><a href="dashboard_user.php" class="link">Home</a></li>
+          <li><a href="about.php" class="link">Tentang Kami</a></li>
           
-          <li><a href="index.php?hal=kontak">Kontak</a></li>
+          <li><a href="kontak.php">Kontak</a></li>
           <li class="dropdown"><a href="#"><span>Kelola Data</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
+          <ul>
               <li><a href="detailuser.php">Data User</a></li>
               <li><a href="pemesanan.php">Data Pemesanan</a></li>
             </ul>
@@ -60,17 +59,16 @@ include '../koneksi.php';
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
             <span>Hello <?php echo $_SESSION['username']; ?></span>
-            <img src="../<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
               <i class="bi bi-chevron-down"></i>
             </a>
               <!-- Dropdown list -->
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="index.php">Kelola User</a></li>
+              <li><a class="dropdown-item" href="detailuser.php">Kelola User</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
-          
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -86,7 +84,7 @@ include '../koneksi.php';
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+          <div class="carousel-item active" style="background-image: url(../assets/img/slide/slide-1.jpg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Welcome to <span>East Horizon Trip</span></h2>
@@ -97,7 +95,7 @@ include '../koneksi.php';
           </div>
 
           <!-- Slide 2 -->
-          <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+          <div class="carousel-item" style="background-image: url(../assets/img/slide/slide-2.jpg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated fanimate__adeInDown">Pesan Tiket <span> Sekarang Juga</span></h2>
@@ -108,7 +106,7 @@ include '../koneksi.php';
           </div>
 
           <!-- Slide 3 -->
-          <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpeg)">
+          <div class="carousel-item" style="background-image: url(../assets/img/slide/slide-3.jpeg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Lihat Rute <span> Yang Kami Lalui</span></h2>
@@ -133,20 +131,30 @@ include '../koneksi.php';
   </section><!-- End Hero -->
 
     <!-- ======= Featured Section ======= -->
+    <?php
+                             $user = mysqli_query($konek, "SELECT * FROM kapal INNER JOIN tujuan ON kapal.tujuan_kapal = tujuan.id_tujuan INNER JOIN kategori ON kapal.kategori_kapal = kategori.id_kategori  ");
+                             foreach ( $user as $data){
+                              
+                             ?>
     <section id="featured" class="featured">
-    <div class="container ">
-     <div class="d-flex flex-row">
-  <div class="col">
-    <div class="card">
-      <img src="assets/img/slide/slide-1.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    <div class="container">
+          <div class="icon-box text-center d-flex mt-4" >
+            <div style="width: 30%;">
+              <img style="width: 300px; height: 300px;" src="../dashboardadmin/<?php echo $data['foto'] ?>" alt=""> 
+            </div>
+            <div style="width: 70%;">
+              <h2 class="mt-4"><?php echo $data['tujuan'] ?></h2>
+              <p class="mb-3"><?php echo $data['nama_kapal'] ?></p>
+              <p class="mb-3"><?php echo $data['nama_kategori_kapal'] ?></p>
+              <h2 class="mt-4"><?php echo "Rp " . number_format($data['harga']) ?></h2>
+              <p class="p-4">Segera Lakukan Pemesanan dan nikmati perjalanan anda</p>
+              <a href="tambahpemesanan.php" role="button" class="btn btn-success">Mulai Pesan</a>
+            </div>
+            
+          </div>
       </div>
-    </div>
-  </div>
-  </div>
     </section><!-- End Featured Section -->
+    <?php } ?>
     <!-- ======= Footer ======= -->
 <footer id="footer">
 

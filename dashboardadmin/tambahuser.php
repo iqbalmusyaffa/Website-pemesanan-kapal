@@ -35,11 +35,11 @@ include '../koneksi.php';
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 </head>  
 <body>
-  <header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
+<header id="header" class="d-flex fixed-top align-items-center" style="padding: 15px 15px 30px 15px; ">
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.php">East Horizon Trip</a></h1>
+        <h1><a href="dashboard_admin.php">East Horizon Trip</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -51,28 +51,28 @@ include '../koneksi.php';
           
           <li><a href="kontak.php">Kontak</a></li>
           <li class="dropdown"><a href="#"><span>Kelola Data</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="index.php?hal=user">Data User</a></li>
-              <li><a href="index.php?hal=kategori">Data Kategori</a></li>
-              <li><a href="index.php?hal=tujuan
-              ">Data Tujuan</a></li>
-              <li><a href="index.php?hal=#">Data Kapal</a></li>
-              <li><a href="index.php?hal=#">Data Pemesanan</a></li>
+          <ul>
+              <li><a href="detailuser.php">Data User</a></li>
+              <li><a href="kategori.php">Data Kategori</a></li>
+              <li><a href="tujuan.php">Data Tujuan</a></li>
+              <li><a href="kapal.php">Data Kapal</a></li>
+              <li><a href="pembayaran.php">Data Pembayaran</a></li>
+              <li><a href="pemesanan.php">Data Pemesanan</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
+            <span>Hello <?php echo $_SESSION['username']; ?></span>
+            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
               <i class="bi bi-chevron-down"></i>
             </a>
               <!-- Dropdown list -->
             <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
               <li><a class="dropdown-item" href="detailuser.php">Kelola User</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
-          <img src="../<?php echo $foto; ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -149,7 +149,7 @@ include '../koneksi.php';
 <label class="form-label" for="typeJeniskelaminX-2">role</label>
             <select class="form-select form-select-sm " aria-label=".form-select-lg example" name="role">
             <option selected>pilih Disini</option>
-            <option value="1">pembeli</option>
+            <option value="pembeli">pembeli</option>
             </select>
             <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top:20px;" name="btnsignup">tambah user</button>
 
@@ -249,7 +249,7 @@ include '../koneksi.php';
 </html>
 <?php
 if (isset($_POST['btnsignup'])) {
-    $namafolder = "assets/img/team/";
+    $namafolder = "../assets/img/team/";
     if (!empty($_FILES["nama_file"]["tmp_name"])) {
     $jenis_gambar = $_FILES['nama_file']['type'];
     $fullname = $_POST['fullname'];
@@ -258,11 +258,12 @@ if (isset($_POST['btnsignup'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
     $notelepon = $_POST['no_telepon'];
+    $role = $_POST['role'];
     if ($jenis_gambar == "image/jpeg" || $jenis_gambar == "image/jpg" || $jenis_gambar == "image/gif" || $jenis_gambar == "image/png") {
         $foto = $namafolder . basename($_FILES['nama_file']['name']);
         if (move_uploaded_file($_FILES['nama_file']['tmp_name'], $foto)) {
-            $sql = "INSERT INTO user (fullname, kelamin, email, username, password, no_telepon, foto) 
-            values('$fullname','$kelamin','$email','$username','$password','$notelepon','$foto')";
+            $sql = "INSERT INTO user (fullname, kelamin, email, username, password, no_telepon, foto,role) 
+            values('$fullname','$kelamin','$email','$username','$password','$notelepon','$foto','$role')";
             $data = mysqli_query($konek, $sql);
             //echo "Gambar berhasil dikirim ke direktori".$gambar;
             echo "<br><div class='alert alert-success'><strong>Success,</strong> Data berhasil disimpan</div><script> document.location.href = 'detailuser.php';</script>";
