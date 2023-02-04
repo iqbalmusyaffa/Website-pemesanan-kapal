@@ -5,6 +5,32 @@ if($_SESSION['role']==""){
 }
 include '../koneksi.php';
 ?>
+ <?php
+    function tanggal_indonesia($tanggal){
+        $bulan = array (
+        1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+        );
+        
+        $pecahkan = explode('-', $tanggal);
+        
+        // variabel pecahkan 0 = tahun
+        // variabel pecahkan 1 = bulan
+        // variabel pecahkan 2 = tanggal
+ 
+        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+    }
+?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='https://www.w3.org/1999/xhtml'>
 <head>
@@ -39,8 +65,8 @@ include '../koneksi.php';
 </td>
         <td valign='top' width='35%'>
 </td>
-        <td valign='top' width='30%' style='font-size:12px;'>Tanggal: <?php echo $data1['tgl_aktif'] ?><br/>
-		Jatuh tempo: <?php echo $data1['tgl_berakhir'] ?> <br/>
+        <td valign='top' width='30%' style='font-size:12px;'>Tanggal: <?php echo tanggal_indonesia($data1['tgl_aktif']) ?><br/>
+		Jatuh tempo: <?php echo tanggal_indonesia($data1['tgl_berakhir']) ?> <br/>
 		
 		
 		</td>

@@ -62,7 +62,7 @@ include '../koneksi.php';
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
             <span>Hello <?php echo $_SESSION['username']; ?></span>
-            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+            <img src="../<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
               <i class="bi bi-chevron-down"></i>
             </a>
               <!-- Dropdown list -->
@@ -89,7 +89,32 @@ include '../koneksi.php';
             <h2>Daftar pemesanan Kapal</h2>
         </div>
     </section><!-- End Breadcrumbs -->
-
+    <?php
+    function tanggal_indonesia($tanggal){
+        $bulan = array (
+        1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+        );
+        
+        $pecahkan = explode('-', $tanggal);
+        
+        // variabel pecahkan 0 = tahun
+        // variabel pecahkan 1 = bulan
+        // variabel pecahkan 2 = tanggal
+ 
+        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+    }
+?>
     <section class="section schedule">
         <div class="container">
             <div class="row">
@@ -140,8 +165,8 @@ include '../koneksi.php';
                             <td><?php echo $data['nama_kapal'] ?></td>
                             <td><?php echo $data['tujuan'] ?></td>
                             <td><?php echo $data['pembayaran'] ?></td>
-                            <td><?php echo $data['tgl_aktif'] ?></td>
-                            <td><?php echo $data['tgl_berakhir'] ?></td>
+                            <td><?php echo tanggal_indonesia($data['tgl_aktif']) ?></td>
+                            <td><?php echo tanggal_indonesia($data['tgl_berakhir']) ?></td>
                             <td><?php echo "Rp " . number_format($data['harga']) ?></td>
                             <td>
                                 <form action="" method="POST" >

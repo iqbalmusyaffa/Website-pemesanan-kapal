@@ -33,6 +33,7 @@ include '../koneksi.php';
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
@@ -66,7 +67,7 @@ include '../koneksi.php';
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
             <span>Hello <?php echo $_SESSION['username']; ?></span>
-            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+            <img src="../<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
               <i class="bi bi-chevron-down"></i>
             </a>
               <!-- Dropdown list -->
@@ -156,7 +157,7 @@ include '../koneksi.php';
 			</div>
             <div class="col-md-3">
                 <label class="form-label fw-bold">tgl berakhir</label>
-				<input type="text" class="form-control main" name="tgl_berakhir" id="datepicker2" rows="3" placeholder="tgl berakhir">
+				<input type="text" class="form-control main" name="tgl_berakhir" id="datepicker2" rows="3" placeholder="tgl berakhir" data-date-end-date="0d">
 			</div>
 			<div class="col-12 text-center mt-4">
 				<button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top:20px;" name="btnsimpan">Tambah Pemesanan</button>
@@ -246,15 +247,19 @@ include '../koneksi.php';
 <script src="../assets/vendor/php-email-form/validate.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <script>
-  $( function() {
-    $( "#datepicker" ).datepicker({
-    dateFormat: 'dd-mm-yy'
+ $(document).ready(function() {
+///////
+ $( "#datepicker" ).datepicker({
+dateFormat: 'dd-mm-yy'
+})
+///////
+///////
+ $( "#datepicker2" ).datepicker({
+dateFormat: 'dd-mm-yy'
 });
-    $( "#datepicker2" ).datepicker({
-    dateFormat: 'dd-mm-yy'
-});
-  } );
+})
   </script>
 
 <!-- Template Main JS File -->
@@ -267,13 +272,14 @@ include '../koneksi.php';
 </html>
 <?php
     if (isset($_POST['btnsimpan'])) {
+        $id_pemesanan = $_POST['id_pemesanan'];
         $user_id = $_POST['user_id'];
         $kapal_id =$_POST['kapal_id'];
         $pembayaran_id =$_POST['pembayaran_id'];
         $tgl_aktif = date("Y-m-d");
         $tgl_berakhir = date("Y-m-d");
         $status = $_POST['status'];
-        $data = mysqli_query($konek, "INSERT INTO pemesanan (user_id,kapal_id,pembayaran_id,tgl_aktif,tgl_berakhir,status) Values('$user_id','$kapal_id','$pembayaran_id','$tgl_aktif','$tgl_berakhir','$status')");
+        $data = mysqli_query($konek, "INSERT INTO pemesanan (id_pemesanan,user_id,kapal_id,pembayaran_id,tgl_aktif,tgl_berakhir,status) Values('$id_pemesanan','$user_id','$kapal_id','$pembayaran_id','$tgl_aktif','$tgl_berakhir','$status')");
         if ($data) {
             echo "<script>alert('Data berhasil dimasukan '); document.location.href = 'pemesanan.php';</script>";
         } else {

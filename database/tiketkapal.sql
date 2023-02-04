@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Feb 2023 pada 01.22
+-- Waktu pembuatan: 04 Feb 2023 pada 09.44
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -111,10 +111,11 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `kapal_id`, `pembayaran_id`, `tgl_aktif`, `tgl_berakhir`, `status`) VALUES
-(4, 43, 7, 10, '2023-01-29', '2023-01-29', 1),
-(5, 45, 7, 12, '2023-01-31', '2023-01-31', 1),
-(6, 46, 8, 13, '2023-02-01', '2023-02-01', 1),
-(9, 42, 8, 12, '2023-02-02', '2023-02-02', 0);
+(23, 50, 7, 12, '2023-02-28', '2023-03-04', 1),
+(25, 45, 7, 10, '2023-02-06', '2023-02-04', 0),
+(29, 26, 7, 9, '2023-02-28', '2023-03-03', 0),
+(33, 46, 8, 12, '2023-03-29', '2023-03-31', 0),
+(34, 46, 3, 10, '2023-03-02', '2023-03-04', 0);
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,8 @@ INSERT INTO `tujuan` (`id_tujuan`, `tujuan`, `dekripsi`, `kategori_id`, `foto`) 
 (31, 'Kanawa island', 'kanawa island', 16, 'assets/img/tujuan/Kanawa Island (1).jpg'),
 (32, 'Mahoro Island', 'pulau indah', 15, 'assets/img/tujuan/Mahoro Island (1).jpg'),
 (33, 'Manjarite Island', 'bagus sekali', 1, 'assets/img/tujuan/Manjarite Island (2).jpg'),
-(34, 'Padar Island', 'bagus sekali', 16, 'assets/img/tujuan/Padar Island (1).jpg');
+(34, 'Padar Island', 'bagus sekali', 16, 'assets/img/tujuan/Padar Island (1).jpg'),
+(35, 'papuatania', 'tes', 16, '../assets/img/team/Kelompok 4 TO-BE (IS 04-02).png');
 
 -- --------------------------------------------------------
 
@@ -164,14 +166,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `fullname`, `kelamin`, `email`, `username`, `password`, `no_telepon`, `foto`, `role`) VALUES
-(24, 'admin', 'L', 'admin@easthorizontrip.co.id', 'admin', 'b93d83634de0b8143a418f91495b4fdb', '085231046663', '../assets/img/team/585e4bf3cb11b227491c339a.png', 'admin'),
-(26, 'usertest', 'L', 'usertest@gmail.com', 'usertest', '8bc2ef369ba36349e5d85dcc8f955948', '085231046663', '../assets/img/team/ryan.png', 'admin'),
-(33, 'pelem', 'L', 'pelem@gmail.com', 'pelem', 'e2c2f9110ea532e5e633e7abf1947b81', '085231046663', '../assets/img/team/image 1.png', 'pembeli'),
-(34, 'susu', 'L', 'susu@gmail.com', 'susu', 'fed2d5a9a0a9a867d22fd966ec97b83e', '8938983477834', '../assets/img/team/image 4.png', 'pembeli'),
-(42, 'vania', 'P', 'vania@gmail.com', 'vanisa', 'daa79954d11cbcd25c91dda710bb7f94', '9098877865675', '../assets/img/team/image 3.png', 'pembeli'),
-(43, 'zakia', 'L', 'zakia@gmail.com', 'zakia', 'test123', '085231046663', '../assets/img/team/WhatsApp Image 2022-11-25 at 15.13.17.jpeg', 'pembeli'),
-(45, 'rama', 'L', 'rama@gmail.com', 'rama', '36226b453eb255f672f118a1ecc1e4ec', '74838934793734789', '../assets/img/team/585e4bf3cb11b227491c339a.png', 'pembeli'),
-(46, 'tesio', 'L', 'tesio@gmail.com', 'tesio', '3ea4d95290a98b3a2842cab6ffc11002', '085231046663', '../assets/img/team/WhatsApp Image 2023-01-29 at 20.08.36.jpeg', 'pembeli');
+(24, 'admin', 'L', 'admin@easthorizontrip.co.id', 'admin', 'b93d83634de0b8143a418f91495b4fdb', '085231046663', 'assets/img/team/585e4bf3cb11b227491c339a.png', 'admin'),
+(26, 'usertest', 'L', 'usertest@gmail.com', 'usertest', '8bc2ef369ba36349e5d85dcc8f955948', '085231046663', 'assets/img/team/ryan.png', 'admin'),
+(33, 'pelem', 'L', 'pelem@gmail.com', 'pelem', 'e2c2f9110ea532e5e633e7abf1947b81', '085231046663', 'assets/img/team/image 1.png', 'pembeli'),
+(34, 'susu', 'L', 'susu@gmail.com', 'susu', 'fed2d5a9a0a9a867d22fd966ec97b83e', '8938983477834', 'assets/img/team/image 4.png', 'pembeli'),
+(42, 'vania', 'P', 'vania@gmail.com', 'vanisa', 'daa79954d11cbcd25c91dda710bb7f94', '9098877865675', 'assets/img/team/image 3.png', 'pembeli'),
+(45, 'rama', 'L', 'rama@gmail.com', 'rama', '36226b453eb255f672f118a1ecc1e4ec', '74838934793734789', 'assets/img/team/585e4bf3cb11b227491c339a.png', 'pembeli'),
+(46, 'tesio', 'L', 'tesio@gmail.com', 'tesio', '3ea4d95290a98b3a2842cab6ffc11002', '085231046663', 'assets/img/team/WhatsApp Image 2023-01-29 at 20.08.36.jpeg', 'pembeli'),
+(50, 'kevinganteng', 'L', 'kevinganteng@gmai.com', 'kevinganteng', '33f987559d39598e36fa995143424f3c', '085231046663', 'assets/img/team/Struktur Organisasi.png', 'pembeli');
 
 --
 -- Indexes for dumped tables
@@ -245,19 +247,19 @@ ALTER TABLE `pembayaran`
 -- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `tujuan`
 --
 ALTER TABLE `tujuan`
-  MODIFY `id_tujuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_tujuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

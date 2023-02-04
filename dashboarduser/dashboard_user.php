@@ -30,6 +30,7 @@ include '../koneksi.php';
   <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
@@ -59,7 +60,7 @@ include '../koneksi.php';
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown">
             <span>Hello <?php echo $_SESSION['username']; ?></span>
-            <img src="<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
+            <img src="../<?php echo $_SESSION['foto'] ?>" style="border-radius: 50%; margin-left: 10px; width: 50px; height: 50px; margin-top: 12px;">
               <i class="bi bi-chevron-down"></i>
             </a>
               <!-- Dropdown list -->
@@ -148,7 +149,7 @@ include '../koneksi.php';
               <p class="mb-3"><?php echo $data['nama_kategori_kapal'] ?></p>
               <h2 class="mt-4"><?php echo "Rp " . number_format($data['harga']) ?></h2>
               <p class="p-4">Segera Lakukan Pemesanan dan nikmati perjalanan anda</p>
-              <a href="tambahpemesanan.php?id=<?php echo $data['id_kapal']; ?>" role="button" class="btn btn-success">Mulai Pesan</a>
+              <a href="tambahpemesanan2.php?id=<?php echo $data['id_kapal']; ?>" role="button" class="btn btn-success">Mulai Pesan</a>
             </div>
             
           </div>
@@ -176,7 +177,6 @@ include '../koneksi.php';
       <div class="col-lg-3 col-md-6 footer-links">
         <h4>Service kami</h4>
         <ul>
-          <li><i class="bx bx-chevron-right"></i> <a href="index.php?hal=tiket">Tiket Kapal</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="index.php?hal=film">Lihat Kapal</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="index.php?hal=kategori">Kategori Kapal</a></li>
    

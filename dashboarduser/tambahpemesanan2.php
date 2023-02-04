@@ -1,7 +1,8 @@
 <?php
 session_start();
+ob_start();
 if($_SESSION['role']==""){
-    header("location:../login.php?pesan=gagal");
+  header("location:login.php?pesan=gagal");
 }
 include '../koneksi.php';
 ?>
@@ -15,8 +16,8 @@ include '../koneksi.php';
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link href="../assets/img/icon.jpg" rel="icon">
+  <!-- Favicons -->
+  <link href="../assets/img/icon.jpg" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -30,6 +31,9 @@ include '../koneksi.php';
   <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
@@ -76,88 +80,88 @@ include '../koneksi.php';
 
     </div>
   </header><!-- End Header -->
-
-<!-- ======= Breadcrumbs ======= -->
-<section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
-
-        <ol>
-          <li><a href="index.php?hal=home">Home</a></li>
-          <li>Tentang Kami</li>
-        </ol>
-        <h2>Tentang Kami</h2>
-
-      </div>
-    </section><!-- End Breadcrumbs -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="info-box mb-4">
-              <i class="bx bx-map"></i>
-              <h3>Alamat Kami</h3>
-              <p>Surabaya, Jawa Timur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="info-box  mb-4">
-              <i class="bx bx-envelope"></i>
-              <h3>Email Kami</h3>
-              <p>info@easthorizontrip.co.id</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="info-box  mb-4">
-              <i class="bx bx-phone-call"></i>
-              <h3>Telepon Kami</h3>
-              <p>+62 877 650 79444</p>
-            </div>
-          </div>
-
+  <section class="page-title bg-title overlay-dark">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<div class="title mt-5">
+					<h3>Tambah Data pembayaran</h3>
+				</div>
+				<ol class="breadcrumb justify-content-center p-0 m-0">
+				  <li class="breadcrumb-item"><a href="index.php?hal=home">Home</a></li>
+                  <li class="breadcrumb-item active">Data Kapal</li>
+                  <li class="breadcrumb-item active">Data pembayaran</li>
+				  <li class="breadcrumb-item active">Tambah Data pembayaran</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section contact-form">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title">
+					<h3>Tambah <span class="alternate">Data pembayaran</span></h3>
+				</div>
+			</div>
+		</div>
+		<form action="" method="POST" class="row" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="text" class="form-control" hidden name="id_pemesanan" autocomplete="off" value="<?php echo $tampil['id_pemesanan']; ?>">
         </div>
+    <label for="exampleFormControlTextarea1" class="form-label">nama pemesanan</label>
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="user_id">
+<option selected>Pilih nama pemesanan dibawah ini </option>
+    <?php
+  $query    =mysqli_query($konek, "SELECT * FROM user WHERE id_user = $_SESSION[id_user] ");
+                while ($data1 = mysqli_fetch_array($query)) {
+                ?>
+                <option value="<?php echo $data1['id_user'];?>"><?php echo $data1['fullname'];?></option>
+                <?php
+                }
+                ?>
+</select>
+<label for="exampleFormControlTextarea1" class="form-label"> nama kapal</label>
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="kapal_id">
+<option selected>Pilih Kapal dibawah ini </option>
+    <?php
+     $id = $_GET['id'];
+  $query    =mysqli_query($konek, "SELECT * FROM kapal WHERE id_kapal='$id'");
+                while ($data1 = mysqli_fetch_array($query)) {
+                ?>
+                <option value="<?php echo $data1['id_kapal'];?>"><?php echo $data1['nama_kapal'];?></option>
+                <?php
+                }
+                ?>
+</select>
+<label for="exampleFormControlTextarea1" class="form-label"> nama Pembayaran</label>
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="pembayaran_id">
+<option selected>Pilih pembayaran dibawah ini </option>
+    <?php
+  $query    =mysqli_query($konek, "SELECT * FROM pembayaran");
+                while ($data1 = mysqli_fetch_array($query)) {
+                ?>
+                <option value="<?php echo $data1['id_pembayaran'];?>"><?php echo $data1['pembayaran'];?></option>
+                <?php
+                }
+                ?>
+</select>
+<div class="col-md-3">
+                <label class="form-label fw-bold">tgl aktif</label>
+				<input type="text" class="form-control main" name="tgl_aktif" id="datepicker" placeholder="tgl aktif">
+			</div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">tgl berakhir</label>
+				<input type="text" class="form-control main" name="tgl_berakhir" id="datepicker2" rows="3" placeholder="tgl berakhir" >
+			</div>
+			<div class="col-12 text-center mt-4">
+				<button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top:20px;" name="btnsimpan">Tambah Pemesanan</button>
 
-        <div class="row">
-
-          <div class="col-lg-6 ">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2173.4166877162165!2d112.72758673477605!3d-7.310389696029573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbd1cb925a1d%3A0x1dbecb0b2e9b059f!2sInstitut%20Teknologi%20Telkom%20Surabaya!5e0!3m2!1sid!2sid!4v1673453877024!5m2!1sid!2sid"  width="635" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
+			</div>
+		</form>
+	</div>
+</section>
     <!-- ======= Footer ======= -->
 <footer id="footer">
 
@@ -237,6 +241,22 @@ include '../koneksi.php';
 <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="../assets/vendor/php-email-form/validate.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script>
+ $(document).ready(function() {
+///////
+ $( "#datepicker" ).datepicker({
+dateFormat: 'dd-mm-yy'
+})
+///////
+///////
+ $( "#datepicker2" ).datepicker({
+dateFormat: 'dd-mm-yy'
+});
+})
+  </script>
 
 <!-- Template Main JS File -->
 <script src="../assets/js/main.js"></script>
@@ -246,3 +266,19 @@ include '../koneksi.php';
 </html>
 </body>
 </html>
+<?php
+    if (isset($_POST['btnsimpan'])) {
+        $id_pemesanan = $_POST['id_pemesanan'];
+        $user_id = $_POST['user_id'];
+        $kapal_id =$_POST['kapal_id'];
+        $pembayaran_id =$_POST['pembayaran_id'];
+        $tgl_aktif = date('Y-m-d', strtotime($_POST['tgl_aktif']));
+        $tgl_berakhir = date('Y-m-d', strtotime($_POST['tgl_berakhir']));
+        $data = mysqli_query($konek, "INSERT INTO pemesanan (id_pemesanan,user_id,kapal_id,pembayaran_id,tgl_aktif,tgl_berakhir) Values('$id_pemesanan','$user_id','$kapal_id','$pembayaran_id','$tgl_aktif','$tgl_berakhir')");
+        if ($data) {
+            echo "<script>alert('Data berhasil dimasukan '); document.location.href = 'pemesanan.php';</script>";
+        } else {
+            echo "<script>alert('Data gagal dimasukan ');</script>";
+        }
+    }
+    ?>
